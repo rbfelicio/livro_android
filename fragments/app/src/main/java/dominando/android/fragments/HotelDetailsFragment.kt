@@ -39,6 +39,26 @@ class HotelDetailsFragment : Fragment(), HotelDetailsView {
         rtbRating.visibility = View.GONE
     }
 
+    override fun showHotels(hotels: List<Hotel>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showDeleteMode() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hideDeleteMode() {
+        TODO("Not yet implemented")
+    }
+
+    override fun showSelectedHotels(hotels: List<Hotel>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun updateSelectionCountText(count: Int) {
+        TODO("Not yet implemented")
+    }
+
     companion object {
         const val TAG_DETAILS = "tagDetalhe"
         private const val EXTRA_HOTEL_ID = "hotelId"

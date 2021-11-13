@@ -21,9 +21,43 @@ class HotelListPresenter(
             if (selectedItems.size == 0){
                 view.hideDeleteMode()
             }else{
-                view.updateSelectionCount
+                view.updateSelectionCountText(selectedItems.size)
+                view.showSelectedHotels(selectedItems)
             }
+        } else {
+            view.showHotelDetails(hotel)
         }
+    }
+
+    private fun toggleHotelSelected(hotel: Hotel){
+        val existing = selectedItems.find { it.id == hotel.id }
+        if (existing == null){
+            selectedItems.add(hotel)
+        } else {
+            selectedItems.removeAll {it.id == hotel.id}
+        }
+    }
+
+    fun showDeleteMode(){
+        inDeleteMode = true
+        view.showDeleteMode()
+    }
+
+    fun hideDeleteMode() {
+        inDeleteMode = false
+        selectedItems.clear()
+        view.hideDeleteMode()
+    }
+
+    fun refresh() {
+        searchHotels(lastTerm)
+    }
+
+    fun deleteSelected(callback: (List<Hotel>) -> Unit){
+        repository.remove(*selectedItems.toTypedArray())
+        refresh()
+        callback(selectedItems)
+        hideDeleteMode()
     }
 
     fun showHotelDetails(hotel: Hotel){
